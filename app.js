@@ -1,10 +1,15 @@
-document.getElementById("downloadBtn").onclick = function() {
-  const videoUrl = document.getElementById("videoUrl").value;
-  
-  if (videoUrl) {
-    // Afficher un message de succès (ou un appel API pour le téléchargement)
-    document.getElementById("message").innerText = "Téléchargement en cours pour : " + videoUrl;
-  } else {
-    document.getElementById("message").innerText = "Veuillez entrer une URL valide.";
-  }
-};
+fetch('https://ton-serveur.com/download', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ url: url })
+})
+.then(response => response.blob())
+.then(blob => {
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = 'video.mp4';
+  link.click();
+})
+.catch(error => console.error('Erreur lors du téléchargement:', error));
