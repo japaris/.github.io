@@ -1,28 +1,44 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  padding: 20px;
+let currentInput = '';
+let operation = '';
+let previousInput = '';
+
+function appendNumber(number) {
+    currentInput += number;
+    document.getElementById('display').value = currentInput;
 }
 
-input {
-  width: 300px;
-  padding: 10px;
-  margin-bottom: 10px;
+function performOperation(op) {
+    if (currentInput === '') return;
+    operation = op;
+    previousInput = currentInput;
+    currentInput = '';
 }
 
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
+function calculateResult() {
+    if (previousInput === '' || currentInput === '') return;
+    let result;
+    switch (operation) {
+        case '+':
+            result = parseFloat(previousInput) + parseFloat(currentInput);
+            break;
+        case '-':
+            result = parseFloat(previousInput) - parseFloat(currentInput);
+            break;
+        case '*':
+            result = parseFloat(previousInput) * parseFloat(currentInput);
+            break;
+        case '/':
+            result = parseFloat(previousInput) / parseFloat(currentInput);
+            break;
+    }
+    document.getElementById('display').value = result;
+    currentInput = result.toString();
+    previousInput = '';
 }
 
-button:hover {
-  background-color: #45a049;
-}
-
-#message {
-  margin-top: 20px;
-  color: red;
+function clearDisplay() {
+    currentInput = '';
+    previousInput = '';
+    operation = '';
+    document.getElementById('display').value = '';
 }
