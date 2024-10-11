@@ -1,18 +1,36 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Téléchargement de vidéos YouTube</title>
-  <link rel="stylesheet" href="styles.css"> <!-- Si tu utilises un fichier CSS -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
 </head>
 <body>
-  <h1>Téléchargez vos vidéos YouTube</h1>
-  <input type="text" id="videoUrl" placeholder="Entrez l'URL de la vidéo" />
-  <button id="downloadBtn">Télécharger</button>
+    <h1>Calculator</h1>
+    <div id="calculator">
+        <input type="text" id="display" disabled>
+        <br>
+        <button onclick="appendNumber('1')">1</button>
+        <button onclick="appendNumber('2')">2</button>
+        <button onclick="appendNumber('3')">3</button>
+        <button onclick="performOperation('+')">+</button>
+        <br>
+        <button onclick="appendNumber('4')">4</button>
+        <button onclick="appendNumber('5')">5</button>
+        <button onclick="appendNumber('6')">6</button>
+        <button onclick="performOperation('-')">-</button>
+        <br>
+        <button onclick="appendNumber('7')">7</button>
+        <button onclick="appendNumber('8')">8</button>
+        <button onclick="appendNumber('9')">9</button>
+        <button onclick="performOperation('*')">*</button>
+        <br>
+        <button onclick="clearDisplay()">C</button>
+        <button onclick="appendNumber('0')">0</button>
+        <button onclick="calculateResult()">=</button>
+        <button onclick="performOperation('/')">/</button>
+    </div>
 
-  <p id="message"></p> <!-- Pour afficher des messages à l'utilisateur -->
-
-  <script src="app.js"></script> <!-- Si tu utilises un fichier JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>
