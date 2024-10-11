@@ -1,15 +1,44 @@
-fetch('https://ton-serveur.com/download', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ url: url })
-})
-.then(response => response.blob())
-.then(blob => {
-  const link = document.createElement('a');
-  link.href = window.URL.createObjectURL(blob);
-  link.download = 'video.mp4';
-  link.click();
-})
-.catch(error => console.error('Erreur lors du téléchargement:', error));
+let currentInput = '';
+let operation = '';
+let previousInput = '';
+
+function appendNumber(number) {
+    currentInput += number;
+    document.getElementById('display').value = currentInput;
+}
+
+function performOperation(op) {
+    if (currentInput === '') return;
+    operation = op;
+    previousInput = currentInput;
+    currentInput = '';
+}
+
+function calculateResult() {
+    if (previousInput === '' || currentInput === '') return;
+    let result;
+    switch (operation) {
+        case '+':
+            result = parseFloat(previousInput) + parseFloat(currentInput);
+            break;
+        case '-':
+            result = parseFloat(previousInput) - parseFloat(currentInput);
+            break;
+        case '*':
+            result = parseFloat(previousInput) * parseFloat(currentInput);
+            break;
+        case '/':
+            result = parseFloat(previousInput) / parseFloat(currentInput);
+            break;
+    }
+    document.getElementById('display').value = result;
+    currentInput = result.toString();
+    previousInput = '';
+}
+
+function clearDisplay() {
+    currentInput = '';
+    previousInput = '';
+    operation = '';
+    document.getElementById('display').value = '';
+}
